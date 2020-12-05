@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from BookItem import BookItem
 
 
@@ -23,7 +22,7 @@ class Book:
 
     def searchBookItem(self, isbn):
         for book_item in self.book_item:
-            if isbn == book_item.isbn:
+            if isbn.strip() == book_item.isbn:
                 return book_item
 
     def removeBookItem(self, book_item):
@@ -32,4 +31,4 @@ class Book:
             self.total_count -= 1
 
     def __repr__(self):
-        return self.name + ' by ' + self.author
+        return self.name + ' ' + self.author

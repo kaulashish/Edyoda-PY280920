@@ -6,4 +6,4 @@ class BookItem:
         self.rack = rack
 
     def __repr__(self):
-        return self.isbn
+        return str(self.isbn)

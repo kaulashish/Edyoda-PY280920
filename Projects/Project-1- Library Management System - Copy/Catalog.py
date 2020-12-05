@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 from Book import Book
 #First Book is file & second is Class
 
 
 class Catalog:
-    different_books_count = 0
+    different_book_count = 0
     books = []
 
     def __init__(self):
@@ -12,16 +11,16 @@ class Catalog:
         self.books = []
 
     #Only available to admin
-    def _addBook(self, name, author, publish_date, pages):
-        book = Book(name, author, publish_date, pages)
+    def addBook(self, name, author, publish_date, pages):
+        b = Book(name, author, publish_date, pages)
         self.different_book_count += 1
-        Catalog.different_books_count = self.different_book_count
-        self.books.append(book)
-        Catalog.books.append(book)
-        return book
+        Catalog.different_book_count += 1
+        self.books.append(b)
+        Catalog.books.append(b)
+        return b
 
     #Only available to admin
-    def _addBookItem(self, book, isbn, rack):
+    def addBookItem(self, book, isbn, rack):
         book.addBookItem(isbn, rack)
 
     def searchByName(self, name):
@@ -29,27 +28,28 @@ class Catalog:
             if name.strip() == book.name:
                 return book
 
-    def searchByAuthor(self, author):  # completed
+    def searchByAuthor(self, author):
         for book in self.books:
             if author.strip() == book.author:
                 return book
 
     def displayAllBooks(self):
-        print('Books in catalog:', self.different_book_count)
+        print('Different Book Count', self.different_book_count)
         c = 0
         for book in self.books:
             c += book.total_count
             book.printBook()
 
-        print(f'Total Book Count: {c}\n')
+        print('Total Book Count', c)
 
-    def _removeBookItem(self, name, isbn):
+    def removeBookItem(self, name, isbn):
         book = self.searchByName(name)
         book_item = book.searchBookItem(isbn)
         book.removeBookItem(book_item)
 
-    def _removeBookFromCatalog(self, name):
+    def removeBookFromCatalog(self, name):
         book = self.searchByName(name)
         self.books.remove(book)
         Catalog.books.remove(book)
         self.different_book_count -= 1
+        Catalog.different_book_count -= 1
